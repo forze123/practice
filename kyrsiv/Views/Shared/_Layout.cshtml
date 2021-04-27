@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden;">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Автоподбор.рф</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="bg-dark">
+    <header style="margin-bottom:0px; padding-bottom:0px; position:fixed; width: 100vw;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3">
+            <div class="container">
+                <img style="width:100px; height:auto;" src="~/image/logo1.png">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Автоподбор.рф</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav p-2 bd-highlight">
+                        @{
+                            if (ViewBag.User == "Admin")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Moder">Модераторы</a>
+                                </li>
+                            }
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="AdminPanel">Войти</a>
+                        </li>
+                        @{
+                            if (ViewBag.User == "Admin")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container" style="margin-bottom:0px; padding-bottom:0px;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer style="height:50px; background-color:#23272b; position:absolute; width:100vw; bottom:0px;">
+        <div class="container">
+            <p style="padding-top:20px;"class="text-dark" >
+                Автор сайта в социальных сетях:
+                <a href="https://vk.com/the_project_smirnov" target=" _blank" class="text-dark">Вконтакте</a>
+            </p>
+            
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

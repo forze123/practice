@@ -1,0 +1,76 @@
+﻿@model IEnumerable<kyrsiv.Models.User>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Просмотр модераторов";
+}
+<div style="padding-top: 100px;">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление модератора</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/Account/AddModer" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <input id="validationDefault01" required maxlength="40" type="text" class="form-control" name="Email" placeholder="Login">
+                            </div>
+                            <div class="col">
+                                <input id="validationDefault02" required maxlength="40" type="text" class="form-control" name="Password" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="float:left">
+                        <button style="color:white" type="submit" class="btn btn-danger">Сохранить</button>
+                        <button style="color:white" type="button" name="Role" value="User" class="btn btn-dark" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: 700px; margin:0 auto">
+        <table class="table table-hover table-dark">
+            <thead class="border-primary">
+                <tr>
+                    <td scope="col">#</td>
+                    <td scope="col">Email</td>
+                    <td scope="col">Password</td>
+                    <td scope="col">
+                        <button type="button" style="float:left" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"> Добавить модератора</button>
+                        <a style="margin-left:10px;" class="btn btn-light" asp-area="" asp-controller="Account" asp-action="AdminPanel">Назад</a>
+                    </td>
+                </tr>
+            </thead>
+            <tbody class="border-primary">
+                @{
+                    int i = 1;
+                }
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td scope="row">@i</td>
+                        <td>@user.Email</td>
+                        <td>@user.Password</td>
+                        <td>
+                            @{if (user.Email != "Admin")
+                                {
+                                    <a href="/Account/DeleteUser/@user.Id" role="button" class="text-light btn-outline-">Удалить модератора</a>
+                                }
+                                else
+                            }
+                        </td>
+                    </tr>
+                    {
+                        i = i + 1;
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

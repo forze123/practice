@@ -1,0 +1,33 @@
+﻿<div style="margin:auto;">
+    <div class="text-light" style="font-size:25px;">
+        <b>@ViewBag.Messeng.Name @ViewBag.Messeng.SyrName</b> <br> <hr color="#FFFFFF">
+        <b>Комментарий:</b><br> @ViewBag.Messeng.Comment<hr color="#FFFFFF">
+        <b>Почта:</b>@ViewBag.Messeng.Email<br><hr color="#FFFFFF">
+    </div>
+</div>
+<form action="/Account/Editing" method="post">
+    <div class="form-group">
+        <div class="row">
+            <b><label for="exampleFormControlSelect1" style="font-size:25px;" class="text-light col">Статус заявки:</label></b>
+            <select style="width:100px;" name="State" class="form-control col-3" id="exampleFormControlSelect1">
+                @{if (@ViewBag.Messeng.State != "Не обработана")
+                    {
+                        <option>@ViewBag.Messeng.State</option>
+                    }
+                }
+                <option>Не обработана</option>
+                <option>Обработана</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <textarea name="Note" style="resize:none; width:475px;" wrap="hard" placeholder="Примечание" cols="10" maxlength="200" class="form-control" id="exampleFormControlTextarea1" rows="3">@ViewBag.Messeng.Note</textarea>
+    </div>
+    <input type="hidden" name="Id" value="@ViewBag.Messeng.Id">
+    <input type="hidden" name="Name" value="@ViewBag.Messeng.Name">
+    <input type="hidden" name="SyrName" value="@ViewBag.Messeng.SyrName">
+    <input type="hidden" name="Email" value="@ViewBag.Messeng.Email">
+    <input type="hidden" name="Comment" value="@ViewBag.Messeng.Comment">
+    <button type="submit" class="btn btn-danger">Обработать</button>
+    <a class="btn btn-light" asp-area="" asp-controller="Account" asp-action="AdminPanel">Назад</a>
+</form>
